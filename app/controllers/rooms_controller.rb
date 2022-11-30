@@ -20,4 +20,8 @@ class RoomsController < ApplicationController
     render json: @moves
   end
 
+  def update_join_status 
+    @room = Room.find_by({:game_id => params[:room_id]})
+    RoomsChannel.broadcast_to(@room, "joined")
+  end
 end
